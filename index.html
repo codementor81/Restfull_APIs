@@ -1,0 +1,68 @@
+<html>
+<head>
+<title>e-mail verification process</title>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    var from,to,subject,text;
+    $("#send_email").click(function(){      
+        to=$("#to").val();      
+        $("#message").text("Sending E-mail...Please wait");
+        $.get("http://localhost:3000/send",{to:to},function(data){
+        if(data=="sent")
+        {
+            $("#message").empty().html("<p>Email is been sent at "+to+" . Please check inbox !</p>");
+        }
+
+});
+    });
+});
+</script>
+<style>
+#container
+{
+    margin-left:400px;
+    margin-top:50px;
+}
+#to,#subject,#content, #name, #salary, #pass, #repass
+{
+    font-family: "Segoe UI";
+    font-size:18px;
+    width:530px;
+}
+h1
+{
+    font-family: "Segoe UI";
+    font-size:40px; 
+    color: #3b5998;
+}
+p
+{
+    color:green;
+}
+#send_email
+{
+    font-size:15px;
+    font-family: "Segoe UI";
+}
+#message
+{
+    font-size:18px;
+}
+</style>
+</head>
+<body>
+<div id="container">
+<h1>E-mail Veryfication with nodejs</h1>
+<form action ="employee" method ="POST">
+<input type="text" id="name" name="name" placeholder="Enter name"><br>
+<input type="text" id="salary" name ="salary" placeholder="Enter salary"><br>
+<input type="text" id="to" name ="email_id" placeholder="Enter e-mail id"><br>
+<input type="password" id="pass" placeholder="Enter password"><br>
+<input type="password" id="repass"name ="password" placeholder="re-enter password"><br>
+<button id="send_email">Sign Up</button><br>
+</form>
+<span id="message"></span>
+</div>
+</body>
+</html>
